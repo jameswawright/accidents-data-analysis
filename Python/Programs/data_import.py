@@ -8,41 +8,99 @@
 ##################################################################################################
 
 
-### Segregating Data Import Section In Terminal
+
+
+#### Segregating Data Import Section In Terminal
 print('\n ---------------------------------------- Data Import ---------------------------------------- \n')
 
 
 
-### Importing Data
+
+#### Importing Data
 
 
-## Import accidents data
 
-# Load data
+### Import accidents data
+
+
+## Load data
 accidents_uncleaned_df = pd.read_csv(raw_data_path/"accidents.csv")
+
+print(accidents_uncleaned_df.tail(10))
+## Structure data types and indices for loaded data appropriately
+
+# Correct default loaded data types
+#- Transform date to datetime
+accidents_uncleaned_df['date'] = pd.to_datetime(accidents_uncleaned_df['date'], format='%d%b%Y', errors='coerce')
+#- Transform time to datetime
+accidents_uncleaned_df['time'] = pd.to_datetime(accidents_uncleaned_df['time'], format='%H:%M', errors='coerce')
+
+# Make index column the index
+print('Duplicates accidents:', accidents_uncleaned_df[accidents_uncleaned_df['index'].duplicated()]['index'].count())
+print('Overall accidents:', accidents_uncleaned_df['index'].count())
+accidents_uncleaned_df.set_index('index', inplace=True)
+
+
 print(accidents_uncleaned_df.dtypes)
-print(accidents_uncleaned_df.head(10))
+print(accidents_uncleaned_df['speed_limit'].unique())
 
 
-## Import casualties data
 
-# Load data
+### Import casualties data
+
+
+## Load data
 casualties_uncleaned_df = pd.read_csv(raw_data_path/"casualties.csv")
-print(casualties_uncleaned_df.dtypes)
-print(casualties_uncleaned_df.head(10))
 
 
-## Import vehicles data
 
-# Load data
+## Structure data types and indices for loaded data appropriately
+
+# Correct default loaded data types
+#- Transform vehicle_ref and casualty_ref from int64 to object as they are just a reference number with no mathematical meaning
+casualties_uncleaned_df = casualties_uncleaned_df.astype({'vehicle_ref' : 'object',
+                                                          'casualty_ref' : 'object'})
+
+# Make index column the index
+print('Duplicates Casualties:', casualties_uncleaned_df[casualties_uncleaned_df['index'].duplicated()]['index'].count())
+print('Overall Casualties:', casualties_uncleaned_df['index'].count())
+casualties_uncleaned_df.set_index('index', inplace=True)
+
+
+
+### Import vehicles data
+
+
+## Load data
 vehicles_uncleaned_df = pd.read_csv(raw_data_path/"vehicles.csv")
-print(vehicles_uncleaned_df.dtypes)
-print(vehicles_uncleaned_df.head(10))
 
 
-## Import population statistics data
+## Structure data types and indices for loaded data appropriately
 
-# Load data
+# Correct default loaded data types
+#- Transform vehicle_ref from int64 to object as it is just a reference number with no mathematical meaning
+vehicles_uncleaned_df = vehicles_uncleaned_df.astype({'vehicle_ref' : 'object'})
+
+
+# Make index column the index
+print('Duplicates Vehicle:', vehicles_uncleaned_df[vehicles_uncleaned_df['index'].duplicated()]['index'].count())
+print('Overall Vehicle:',vehicles_uncleaned_df['index'].count())
+vehicles_uncleaned_df.set_index('index', inplace=True)
+
+
+
+### Import population statistics data
+
+
+## Load data
 population_statistics_uncleaned_df = pd.read_csv(raw_data_path/"population_statistics.csv")
-print(population_statistics_uncleaned_df.dtypes)
-print(population_statistics_uncleaned_df.head(10))
+
+
+## Structure data types and indices for loaded data appropriately
+
+# Correct default loaded data types
+#- Transform population comma-separated string data type from string to int: first regex to replace non-integers with nothing, then convert to numeric
+population_statistics_uncleaned_df['Population'] = pd.to_numeric(population_statistics_uncleaned_df['Population'].str.replace('[^0-9]', ''))
+
+# Make Code column the index - tested and contains no duplicates so safe to do so
+population_statistics_uncleaned_df.set_index('Code', inplace=True)
