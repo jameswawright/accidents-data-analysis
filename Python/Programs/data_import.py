@@ -38,10 +38,9 @@ accidents_uncleaned_df['time'] = pd.to_datetime(accidents_uncleaned_df['time'], 
 # Make index column the index
 print('Duplicates accidents:', accidents_uncleaned_df[accidents_uncleaned_df['index'].duplicated()]['index'].count())
 print('Overall accidents:', accidents_uncleaned_df['index'].count())
-accidents_uncleaned_df.set_index('index', inplace=True)
+#accidents_uncleaned_df.set_index('index', inplace=True)
 
 
-print(accidents_uncleaned_df.dtypes)
 print(accidents_uncleaned_df['speed_limit'].unique())
 
 
@@ -64,7 +63,7 @@ casualties_uncleaned_df = casualties_uncleaned_df.astype({'vehicle_ref' : 'objec
 # Make index column the index
 print('Duplicates Casualties:', casualties_uncleaned_df[casualties_uncleaned_df['index'].duplicated()]['index'].count())
 print('Overall Casualties:', casualties_uncleaned_df['index'].count())
-casualties_uncleaned_df.set_index('index', inplace=True)
+#casualties_uncleaned_df.set_index('index', inplace=True)
 
 
 
@@ -85,7 +84,7 @@ vehicles_uncleaned_df = vehicles_uncleaned_df.astype({'vehicle_ref' : 'object'})
 # Make index column the index
 print('Duplicates Vehicle:', vehicles_uncleaned_df[vehicles_uncleaned_df['index'].duplicated()]['index'].count())
 print('Overall Vehicle:',vehicles_uncleaned_df['index'].count())
-vehicles_uncleaned_df.set_index('index', inplace=True)
+#vehicles_uncleaned_df.set_index('index', inplace=True)
 
 
 
@@ -103,4 +102,6 @@ population_statistics_uncleaned_df = pd.read_csv(raw_data_path/"population_stati
 population_statistics_uncleaned_df['Population'] = pd.to_numeric(population_statistics_uncleaned_df['Population'].str.replace('[^0-9]', ''))
 
 # Make Code column the index - tested and contains no duplicates so safe to do so
-population_statistics_uncleaned_df.set_index('Code', inplace=True)
+# population_statistics_uncleaned_df.set_index('Code', inplace=True)
+
+print('NOTE: Data Imported.')
