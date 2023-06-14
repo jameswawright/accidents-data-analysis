@@ -150,4 +150,50 @@ print('Note: Duplicate Data Reports Exported To CSV.')
 
 
 
+#### Create New Accidents Columns
 
+
+
+### Country Column
+
+
+
+### Weekday Column
+
+
+
+### Season Column
+
+
+
+
+
+#### Create New Casualties Columns
+
+
+
+### Number of Casualties Per Accident Column
+
+
+
+
+
+#### Create New Vehicles Columns
+
+
+
+### Number of Vehicles Per Accident Column
+
+
+
+
+
+#### Create Road_Accidents
+
+
+
+### Combining Accidents, Casualties, Vehicles
+
+
+
+### Merging Population Statistics
