@@ -11,7 +11,3 @@
 ## Segregating Data Analysis Section In Terminal
 print('\n ---------------------------------------- Data Analysis ---------------------------------------- \n')
 
-
-## Assigning Required Libraries
-import pandas as pd
-import matplotlib.pyplot as plt
