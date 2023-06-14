@@ -13,9 +13,6 @@
 #### Path to root folder
 root_path = "/Users/jameswright/Desktop/accidents-data-analysis"
 
-print(root_path)
-
-
 
 
 

@@ -42,7 +42,7 @@ for key in {old_key : df_dict[old_key] for old_key in df_dict if old_key !='Popu
     missing = pd.concat([missing, df_missing], axis=0, ignore_index=True)
 
 
-## Sort dataframe by missing count
+## Sort missing dataframe by missing count
 missing.sort_values(by='Number_Missing', 
                     ascending=False, 
                     inplace=True, 
@@ -98,7 +98,18 @@ for key in df_dict:
     unique = pd.concat([unique, df_unique], axis=0, ignore_index=True)
 
 
+## Sort duplicates dataframe by missing count
+duplicates.sort_values(by='Number_Duplicate_Rows', 
+                    ascending=False, 
+                    inplace=True, 
+                    ignore_index = True)
 
+
+## Sort missing dataframe by table and column
+unique.sort_values(by=['Table', 'Column'], 
+                    ascending=False, 
+                    inplace=True, 
+                    ignore_index = True)
 
 ### Output Unique Data Reports CSV to Report Folder
 
