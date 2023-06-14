@@ -62,6 +62,20 @@ print('Note: Missing Data Report Exported To CSV.')
 
 
 
+#### Handling Missing Values
+
+
+
+
+
+
+#### Formatting Columns Entries
+
+
+
+
+
+
 #### Handling Duplicates
 
 
@@ -111,6 +125,9 @@ unique.sort_values(by=['Table', 'Column'],
                     inplace=True, 
                     ignore_index = True)
 
+
+
+
 ### Output Unique Data Reports CSV to Report Folder
 
 # Export Duplicate Counts to CSV
@@ -128,4 +145,4 @@ print('Note: Duplicate Data Reports Exported To CSV.')
 
 
 
-#### Handling Missing Values
+
