@@ -42,12 +42,15 @@ accidents_uncleaned_df['time'] = pd.to_datetime(accidents_uncleaned_df['time'],
                                                 format='%H:%M', 
                                                 errors='coerce')
 
-print(accidents_uncleaned_df['speed_limit'].unique())
-
-# Make index column the index
-print('Duplicates accidents:', accidents_uncleaned_df[accidents_uncleaned_df['index'].duplicated()]['index'].count())
-print('Overall accidents:', accidents_uncleaned_df['index'].count())
-#accidents_uncleaned_df.set_index('index', inplace=True)
+# Make accident index column the index
+#- 0 Duplicates in this index, makes sense as every accident should be unique - can use later without worry.
+#- All rows accounted for.
+print('--- Accidents Data Index Check ---')
+print('Index Duplicates Accidents:', accidents_uncleaned_df[accidents_uncleaned_df['index'].duplicated()]['index'].count())
+print('Number of Indicies Accidents (Non-Missing):', accidents_uncleaned_df['index'].count())
+print('Overall Accidents Data Rows:', accidents_uncleaned_df.shape[0])
+print('-----------------------------------')
+accidents_uncleaned_df.set_index('index', inplace=True)
 
 
 
@@ -68,10 +71,15 @@ casualties_uncleaned_df = pd.read_csv(raw_data_path/"casualties.csv",
 casualties_uncleaned_df = casualties_uncleaned_df.astype({'vehicle_ref' : 'object',
                                                           'casualty_ref' : 'object'})
 
-# Make index column the index
-print('Duplicates Casualties:', casualties_uncleaned_df[casualties_uncleaned_df['index'].duplicated()]['index'].count())
-print('Overall Casualties:', casualties_uncleaned_df['index'].count())
-#casualties_uncleaned_df.set_index('index', inplace=True)
+# Make accident index column the index for convenience in data_transformation stage
+#- 44763 Duplicates in this index, makes sense as multiple casualties per accident can occur, handle with care later.
+#- All rows accounted for.
+print('--- Casualties Data Index Check ---')
+print('Index Duplicates Casualties:', casualties_uncleaned_df[casualties_uncleaned_df['index'].duplicated()]['index'].count())
+print('Number of Indicies Casualties (Non-Missing):', casualties_uncleaned_df['index'].count())
+print('Overall Casualties Data Rows:', casualties_uncleaned_df.shape[0])
+print('-----------------------------------')
+casualties_uncleaned_df.set_index('index', inplace=True)
 
 
 
@@ -91,10 +99,15 @@ vehicles_uncleaned_df = pd.read_csv(raw_data_path/"vehicles.csv",
 vehicles_uncleaned_df = vehicles_uncleaned_df.astype({'vehicle_ref' : 'object'})
 
 
-# Make index column the index
-print('Duplicates Vehicle:', vehicles_uncleaned_df[vehicles_uncleaned_df['index'].duplicated()]['index'].count())
-print('Overall Vehicle:',vehicles_uncleaned_df['index'].count())
-#vehicles_uncleaned_df.set_index('index', inplace=True)
+# Make accident index column the index
+#- 115879 Duplicates in this index, makes sense as multiple vehicles can occur in an accident, handle with care later.
+#- All rows accounted for.
+print('--- Vehicles Data Index Check ---')
+print('Index Duplicates Vehicles:', vehicles_uncleaned_df[vehicles_uncleaned_df['index'].duplicated()]['index'].count())
+print('Number of Indicies Vehicles (Non-Missing):', vehicles_uncleaned_df['index'].count())
+print('Overall Vehicles Data Rows:', vehicles_uncleaned_df.shape[0])
+print('-----------------------------------')
+vehicles_uncleaned_df.set_index('index', inplace=True)
 
 
 
@@ -105,6 +118,11 @@ print('Overall Vehicle:',vehicles_uncleaned_df['index'].count())
 population_statistics_uncleaned_df = pd.read_csv(raw_data_path/"population_statistics.csv",
                                                  na_values=['-1', 'Data missing or out of range'])
 
+# Add London Airport (Heathrow) to population data
+heathrow_code = pd.DataFrame(data={'Code' : ['EHEATHROW'],
+                                   'Area_Name' : ['London Airport (Heathrow)'],
+                                   'Population' : ['206,800']})
+population_statistics_uncleaned_df = pd.concat([population_statistics_uncleaned_df, heathrow_code], axis=0, ignore_index=True)
 
 ## Structure data types and indices for loaded data appropriately
 
@@ -113,7 +131,14 @@ population_statistics_uncleaned_df = pd.read_csv(raw_data_path/"population_stati
 population_statistics_uncleaned_df['Population'] = pd.to_numeric(population_statistics_uncleaned_df['Population'].str.replace('[^0-9]', ''))
 
 # Make Code column the index - tested and contains no duplicates so safe to do so
-# population_statistics_uncleaned_df.set_index('Code', inplace=True)
+#- 0 Duplicates in this index, makes sense as one area should have one code - can use without worry
+#- All rows accounted for.
+print('--- Population Data Index Check ---')
+print('Index Duplicates Population:', population_statistics_uncleaned_df[population_statistics_uncleaned_df['Code'].duplicated()]['Code'].count())
+print('Number of Indicies Population (Non-Missing):', population_statistics_uncleaned_df['Code'].count())
+print('Overall Population Data Rows:', population_statistics_uncleaned_df.shape[0])
+print('-----------------------------------')
+population_statistics_uncleaned_df.set_index('Code', inplace=True)
 
 
 
