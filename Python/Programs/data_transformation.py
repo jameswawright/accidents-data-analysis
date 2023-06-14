@@ -43,7 +43,10 @@ for key in {old_key : df_dict[old_key] for old_key in df_dict if old_key !='Popu
 
 
 ## Sort dataframe by missing count
-missing.sort_values(by='Number_Missing', ascending=False, inplace=True, ignore_index = True)
+missing.sort_values(by='Number_Missing', 
+                    ascending=False, 
+                    inplace=True, 
+                    ignore_index = True)
 
 
 
