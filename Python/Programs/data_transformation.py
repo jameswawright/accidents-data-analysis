@@ -40,7 +40,7 @@ missing = pd.DataFrame(columns=['Table','Column','Number_Missing'])
 ## Append Missing Values Count To Missing For Each Data Frame
 
 # Iterate over dictionary of dataframes, excluding population dataframe from dictionary iterated over
-for key in {old_key : df_dict[old_key] for old_key in df_dict if old_key !='Population'}:
+for key in df_dict.keys():
 
     # Count missing values in each data frame in dictionary, label index as column, reset index to turn series into data frame with missing count as number_missing
     df_missing = df_dict[key].isna().sum().rename_axis('Column').reset_index(name='Number_Missing')
@@ -317,7 +317,11 @@ unique = pd.DataFrame(columns=['Table', 'Column', 'Unique_Value', 'Number_Values
 ## Append Duplicate and Unique Counts Per Table to Each Dataframe Initialised Above
 
 # Iterate over dictionary of dataframes
-for key in df_dict_cleaned:
+for key in df_dict_cleaned.keys():
+
+    # Don't care about population
+    if key != 'Population':
+        continue
 
     # Count duplicated values in each data frame in dictionary, label index as column, reset index to turn series into data frame with missing count as number_missing
     df_duplicates = pd.DataFrame({'Table' : [key], 
@@ -379,7 +383,7 @@ accidents_df['Country'] = np.select(condlist=[accidents_df['highway_authority'].
                                               accidents_df['highway_authority'].str.startswith('S'), 
                                               accidents_df['highway_authority'].str.startswith('W'), 
                                               accidents_df['highway_authority'].str.startswith('N'), 
-                                              False],
+                                              accidents_df['highway_authority'].isna()],
                                     choicelist=['England', 
                                                 'Scotland', 
                                                 'Wales', 
@@ -402,13 +406,12 @@ accidents_df['Season'] = np.select(condlist=[(accidents_df['date'].dt.month >= 1
                                              (accidents_df['date'].dt.month >= 3) & (accidents_df['date'].dt.month < 6),
                                              (accidents_df['date'].dt.month >=6) & (accidents_df['date'].dt.month < 9), 
                                              (accidents_df['date'].dt.month >= 9) & (accidents_df['date'].dt.month < 12),
-                                             False],
+                                             (accidents_df['date'].isna())],
                                     choicelist=['Winter', 
                                                 'Spring', 
                                                 'Summer', 
                                                 'Autumn',
                                                 'Unknown'])
-
 
 
 
@@ -437,16 +440,41 @@ vehicles_df['vehicles_per_accident'] = vehicles_df.reset_index().groupby(['index
 
 
 
-
-
-
-
 #### Create Road_Accidents
 
+## Combining Accidents, Casualties, Vehicles
+
+# Merge accidents with casualties on common accidents index as key, then merge vehicles on common accidents index as key, using left joins as we want to retain all accidents as the dominant table of interest
+#- Resetting index in accidents table to retain it on merge
+#- Validating one-to-many in first accidents merge with casualties, as accidents should be unique
+road_accidents = accidents_df.reset_index().merge(casualties_df, how='left', left_on='index', right_on='index', validate='one_to_many').merge(vehicles_df, how='left', left_on='index', right_on='index')
+
+## Merging Population Statistics
+
+# Merge road accidents using highway authority as key with population statistics using code as key; left join used as all accidents should be retained as the dominant table of interest
+#- Validating many-to-one as population zone codes should be unique
+road_accidents = road_accidents.merge(population_statistics_df, how='left', left_on='highway_authority', right_on='Code', validate='many_to_one')
 
 
-### Combining Accidents, Casualties, Vehicles
+## Create Animal Involved Column
 
 
+print(road_accidents.columns)
+print(road_accidents['carriageway_hazards'].unique())
+print(road_accidents['hit_object_in_carriageway'].unique())
+print(road_accidents['hit_object_off_carriageway'].unique())
+print(road_accidents['vehicle_type'].unique())
 
-### Merging Population Statistics
+# If any column columns listed contain an animal description assign 'Yes', else 'No'
+road_accidents['animal_involved'] = np.where((road_accidents['carriageway_hazards'] == 'Any Animal In Carriageway (Except Ridden Horse)') | 
+                                             (road_accidents['hit_object_in_carriageway'] == 'Any Animal (Except Ridden Horse)') | 
+                                             (road_accidents['vehicle_type'] == 'Ridden Horse'), 
+                                             'Yes', 
+                                             'No')
+
+print(road_accidents[road_accidents['carriageway_hazards'] == 'Any Animal In Carriageway (Except Ridden Horse)'])
+
+road_accidents.to_csv(reports_path/'road_accidents.csv', 
+               index=True, 
+               header=road_accidents
+               .columns)

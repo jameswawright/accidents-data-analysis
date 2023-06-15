@@ -143,11 +143,7 @@ population_statistics_uncleaned_df.set_index('Code', inplace=True)
 
 
 
-#### Create a dictionary of data frame names
-df_dict = {'Casualties' : casualties_uncleaned_df,
-           'Vehicles' : vehicles_uncleaned_df,
-           'Accidents' : accidents_uncleaned_df,
-           'Population' : population_statistics_uncleaned_df}
+
 
 
 
