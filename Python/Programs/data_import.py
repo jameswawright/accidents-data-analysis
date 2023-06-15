@@ -118,7 +118,7 @@ vehicles_uncleaned_df.set_index('index', inplace=True)
 population_statistics_uncleaned_df = pd.read_csv(raw_data_path/"population_statistics.csv",
                                                  na_values=['-1', 'Data missing or out of range'])
 
-# Add London Airport (Heathrow) to population data
+# Add London Airport (Heathrow) to population data with average daily passengers in 2016
 heathrow_code = pd.DataFrame(data={'Code' : ['EHEATHROW'],
                                    'Area_Name' : ['London Airport (Heathrow)'],
                                    'Population' : ['206,800']})
