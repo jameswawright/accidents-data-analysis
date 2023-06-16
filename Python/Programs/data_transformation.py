@@ -248,7 +248,6 @@ accidents_df['road_conditions'] = np.select(condlist=[accidents_df['weather'].st
 
 ### Missing Values And Formats in Casualties
 
-print(casualties_df.columns)
 
 ## Assign Location Values
 
@@ -270,7 +269,7 @@ casualties_df['pedestrian_movement'].fillna('Unknown Or Other', inplace=True)
 
 ## Assign Missing Casualty Sex Values
 
-# Replace NA's with 'Unknown or other'
+# Replace NA's with 'Unknown'
 casualties_df['casualty_sex'].fillna('Unknown', inplace=True)
 
 # Use starting values to identify sex
@@ -289,12 +288,12 @@ casualties_df['car_passenger'] = np.where(casualties_df['casualty_class'] == 'Pe
                                           'Not Car Passenger',
                                           casualties_df['car_passenger'])
 
-# Replace NA's with 'Unknown or other'
+# Replace NA's with 'Unknown'
 casualties_df['car_passenger'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Casualty Age  Values
-#print(casualties_df['casualty_age'].unique())
+print(casualties_df['casualty_age'].unique())
 
 
 
@@ -308,7 +307,7 @@ vehicles_df = vehicles_df.drop(['vehicle_age', 'propulsion_code'], axis='columns
 
 ## Assign Missing Driver Sex Values
 
-# Replace NA's with 'Unknown or other'
+# Replace NA's with 'Not Known'
 vehicles_df['driver_sex'].fillna('Not Known', inplace=True)
 
 # Use starting values to identify sex
@@ -319,47 +318,66 @@ vehicles_df['driver_sex'] = np.select([vehicles_df['driver_sex'].str.startswith(
 
 
 ## Assign Missing Vehicle Type Values
-#print(vehicles_df['vehicle_type'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['vehicle_type'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Off Carriageway Values
-#print(vehicles_df['hit_object_off_carriageway'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['hit_object_off_carriageway'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Junction Location Values
-#print(vehicles_df['junction_location'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['junction_location'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Skidding Values
-#print(vehicles_df['skidding_and_overturning'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['skidding_and_overturning'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Towing Values
-#print(vehicles_df['towing_and_articulation'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['towing_and_articulation'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Manoeuvre Values
-#print(vehicles_df['vehicle_manoeuvre'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['vehicle_manoeuvre'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Leaving Carriageway Values
-#print(vehicles_df['vehicle_leaving_carriageway'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['vehicle_leaving_carriageway'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Left Hand Drive Values
-#print(vehicles_df['left_hand_drive'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['left_hand_drive'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Hit Object Values
-#print(vehicles_df['hit_object_in_carriageway'].unique())
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['hit_object_in_carriageway'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Impact Values
-#print(vehicles_df['impact'].unique())
 
+# Replace NA's with 'Unknown or other'
+vehicles_df['impact'].fillna('Unknown', inplace=True)
 
 ## Assign Missing Driver Age Values
-#print(vehicles_df['driver_age'].unique())
+print(vehicles_df['driver_age'].unique())
 
 
 
@@ -519,10 +537,10 @@ vehicles_df['vehicles_per_accident'] = vehicles_df.reset_index().groupby(['index
 
 ## Combining Accidents, Casualties, Vehicles
 
-# Merge accidents with casualties on common accidents index as key, then merge vehicles on common accidents index as key, using left joins as we want to retain all accidents as the dominant table of interest
+# Merge accidents with casualties on common accidents index as key, then merge vehicles on common accidents index and vehicle reference as key, using left joins as we want to retain all accidents as the dominant table of interest
 #- Resetting index in accidents table to retain it on merge
 #- Validating one-to-many in first accidents merge with casualties, as accidents should be unique
-road_accidents = accidents_df.reset_index().merge(casualties_df, how='left', left_on='index', right_on='index', validate='one_to_many').merge(vehicles_df, how='left', left_on='index', right_on='index')
+road_accidents = accidents_df.reset_index().merge(casualties_df, how='left', left_on='index', right_on='index', validate='one_to_many').merge(vehicles_df, how='left', left_on=['index', 'vehicle_ref'], right_on=['index', 'vehicle_ref'])
 
 
 ## Merging Population Statistics

@@ -63,7 +63,6 @@ casualties_uncleaned_df = pd.read_csv(raw_data_path/"casualties.csv",
                                       na_values=['-1', 'Data missing or out of range'])
 
 
-
 ## Structure data types and indices for loaded data appropriately
 
 # Correct default loaded data types

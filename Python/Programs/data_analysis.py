@@ -57,6 +57,7 @@ road_accidents_per_weekday_mean.to_csv(reports_path/'road_accidents_per_weekday.
 casualty_severity_per_country = road_accidents.groupby(['country', 'casualty_severity']).agg(total_casualties=('casualty_severity','count')).reset_index()
 print(casualty_severity_per_country)
 
+print(road_accidents.shape)
 # # Merge to have population with road accidents per weekday
 # casualty_severity_per_country = casualty_severity_per_country.merge(populations_per_country, how='left', left_on='country', right_on='country')
 # print(casualty_severity_per_country)
