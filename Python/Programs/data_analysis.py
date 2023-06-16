@@ -12,7 +12,7 @@
 #### Segregating Data Analysis Section In Terminal
 print('\n ---------------------------------------- Data Analysis ---------------------------------------- \n')
 
-print(road_accidents.columns)
+
 
 
 #### Analyse Road Accidents
@@ -48,24 +48,30 @@ road_accidents_per_weekday_mean.to_csv(reports_path/'road_accidents_per_weekday.
 ### A table showing the frequency of casualty severity by country per 1,000,000 inhabitants of each country.
 
 ## Report On Casualty Severity Frequency by Country per 1,000,000 Inhabitants of Each Country
-
-# # Compute population per country
-# populations_per_country = road_accidents.groupby(['country']).agg(total_population=('Population','sum')).reset_index()
-# print(populations_per_country)
+ 
+ # Compute population per country
+ #- First extract populations per area, we pick the max as they are duplicated per accident but identical so it doesn't matter which we choose. 
+ #- Then regroup this result by country, summing these unduplicated populations to get population per country.
+populations_per_country = road_accidents.groupby(['country', 'Area_Name']).agg(total_population=('Population','max')).reset_index().groupby(['country']).agg(total_population=('total_population','sum')).reset_index()
 
 # Compute road accidents per weekday and order by above weekdays for report
 casualty_severity_per_country = road_accidents.groupby(['country', 'casualty_severity']).agg(total_casualties=('casualty_severity','count')).reset_index()
-print(casualty_severity_per_country)
 
-print(road_accidents.shape)
-# # Merge to have population with road accidents per weekday
-# casualty_severity_per_country = casualty_severity_per_country.merge(populations_per_country, how='left', left_on='country', right_on='country')
-# print(casualty_severity_per_country)
 
-# # Send Casualty Severity Frequency by Country per 1,000,000 Inhabitants of Each Country To Reports As CSV
-# casualty_severity_per_country.to_csv(reports_path/'casualty_severity_per_country.csv',
-#                                      index=False,
-#                                      header= ['Country', 'Casualty Severity', 'Frequency Per 1,000,000 Inhabitants', 'pop.'])
+# Merge to have population with road accidents per weekday
+casualty_severity_per_country = pd.merge(left=casualty_severity_per_country, 
+                                         right=populations_per_country, 
+                                         how='inner', 
+                                         left_on='country', 
+                                         right_on='country')
+
+# Compute casualties per million of the population in a country
+casualty_severity_per_country['casualty_severity_per_country_million_inhabitants'] = casualty_severity_per_country['total_casualties']/casualty_severity_per_country['total_population']*1000000
+
+# Send Casualty Severity Frequency by Country per 1,000,000 Inhabitants of Each Country To Reports As CSV without intermediate columns
+casualty_severity_per_country.drop(['total_casualties', 'total_population'], axis='columns').to_csv(reports_path/'casualty_severity_per_country.csv',
+                                     index=False,
+                                     header= ['Country', 'Casualty Severity', 'Frequency Per 1,000,000 Inhabitants'])
 
 
 
@@ -220,4 +226,4 @@ fig.savefig(reports_path/'pop_vs_accidents_plot.png')
 plt.show()
 
 
-#- We see that the number of accidents increases by population of an area
+#- We see that there is a positive correlation between number of accidents and population of an area

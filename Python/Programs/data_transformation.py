@@ -158,8 +158,10 @@ accidents_df['road_type'].fillna('Unknown', inplace=True)
 
 
 ## Assign Missing Time Values
-print(accidents_df.columns)
-print(accidents_df[accidents_df['time'].isna()][['time', 'light_conditions', 'site_conditions']])
+
+# Impute Missing Time As Mean Of Similar Characteristics
+characteristics = ['highway_authority', 'light_conditions', 'weather', 'road_conditions', 'site_conditions']
+accidents_df['time'] = accidents_df['time'].fillna(accidents_df.groupby(characteristics)['time'].transform('mean'))
 
 
 ## Assign Missing Weather Values To Unknown Category
@@ -292,9 +294,11 @@ casualties_df['car_passenger'] = np.where(casualties_df['casualty_class'] == 'Pe
 casualties_df['car_passenger'].fillna('Unknown', inplace=True)
 
 
-## Assign Missing Casualty Age  Values
-print(casualties_df['casualty_age'].unique())
+## Assign Missing Casualty Age Values
 
+# Impute Missing Casualty Age As Mean Of Similar Characteristics
+characteristics = ['casualty_class', 'casualty_sex', 'casualty_severity', 'casualty_type', 'location', 'pedestrian_movement', 'car_passenger', 'bus_or_coach_passenger']
+casualties_df['casualty_age'] = casualties_df['casualty_age'].fillna(casualties_df.groupby(characteristics)['casualty_age'].transform('mean'))
 
 
 ### Missing Values in Vehicles
@@ -377,7 +381,10 @@ vehicles_df['hit_object_in_carriageway'].fillna('Unknown', inplace=True)
 vehicles_df['impact'].fillna('Unknown', inplace=True)
 
 ## Assign Missing Driver Age Values
-print(vehicles_df['driver_age'].unique())
+
+# Impute Missing Driver Age As Mean Casualty Age By Characteristics
+characteristics = ['driver_sex', 'vehicle_type','towing_and_articulation', 'vehicle_manoeuvre', 'skidding_and_overturning', 'vehicle_leaving_carriageway', 'left_hand_drive']
+vehicles_df['driver_age'] = vehicles_df['driver_age'].fillna(vehicles_df.groupby(characteristics)['driver_age'].transform('mean'))
 
 
 

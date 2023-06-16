@@ -128,7 +128,7 @@ population_statistics_uncleaned_df = pd.concat([population_statistics_uncleaned_
 
 # Correct default loaded data types
 #- Transform population comma-separated string data type from string to int: first regex to replace non-integers with nothing, then convert to numeric
-population_statistics_uncleaned_df['Population'] = pd.to_numeric(population_statistics_uncleaned_df['Population'].str.replace('[^0-9]', '')).astype('int')
+population_statistics_uncleaned_df['Population'] = pd.to_numeric(population_statistics_uncleaned_df['Population'].str.replace('[^0-9]', '')).round().astype('int')
 
 # Make Code column the index - tested and contains no duplicates so safe to do so
 #- 0 Duplicates in this index, makes sense as one area should have one code - can use without worry
