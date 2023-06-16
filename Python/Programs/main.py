@@ -77,7 +77,3 @@ with open(programs_path/"data_analysis.py") as data_analysis:
 
 
 
-
-#### Run hypothesis testing program
-with open(programs_path/"hypothesis_testing.py") as hypothesis_testing:
-    exec(hypothesis_testing.read())

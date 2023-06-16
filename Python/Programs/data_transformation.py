@@ -566,7 +566,32 @@ road_accidents['animal_involved'] = np.where((road_accidents['carriageway_hazard
                                              'Yes', 
                                              'No')
 
-# Send Road Accidents To Reports As CSV
+
+
+
+#### Export Cleaned and Transformed Data
+
+# Send Road Accidents To Cleaned Data As CSV
+accidents_df.to_csv(cleaned_data_path/'accidents.csv', 
+               index=False, 
+               header=accidents_df.columns)
+
+# Send Road Accidents To Cleaned Data As CSV
+casualties_df.to_csv(cleaned_data_path/'casualties.csv', 
+               index=False, 
+               header=casualties_df.columns)
+
+# Send Road Accidents To Cleaned Data As CSV
+vehicles_df.to_csv(cleaned_data_path/'vehicles.csv', 
+               index=False, 
+               header=vehicles_df.columns)
+
+# Send Road Accidents To Cleaned Data As CSV
+population_statistics_df.to_csv(cleaned_data_path/'population_statistics.csv', 
+               index=False, 
+               header=population_statistics_df.columns)
+
+# Send Road Accidents To Cleaned Data As CSV
 road_accidents.to_csv(cleaned_data_path/'road_accidents.csv', 
                index=False, 
                header=road_accidents.columns)

@@ -19,7 +19,7 @@ print('\n ---------------------------------------- Data Analysis ---------------
 
 
 
-### The number of accidents per weekday. Do any days have a significantly different number of accidents to others?
+### The number of accidents per weekday.
 
 
 ## Report On Road Accidents Per Weekday
@@ -227,3 +227,5 @@ plt.show()
 
 
 #- We see that there is a positive correlation between number of accidents and population of an area
+
+print('Note: Data Analysis Completed.')
