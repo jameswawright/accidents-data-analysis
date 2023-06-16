@@ -75,7 +75,7 @@ print('Note: Missing Data Report Exported To CSV.')
 #### Copy for cleaning
 
 
-## Copy dataframes
+## Copy dataframes to avoid editing original
 
 # Copy casualties
 casualties_df = casualties_uncleaned_df.copy()
@@ -99,178 +99,6 @@ df_dict_cleaned = {'Casualties' : casualties_df,
 
 
 
-#### Handling Missing Values
-
-
-
-### Missing Values in Accidents
-
-
-## Drop speed_limit column as entirely missing and not needed for analysis
-accidents_df = accidents_df.drop(['speed_limit'], axis='columns')
-
-
-## Assign Missing Road Type To Unknown
-accidents_df[['road_type']] = accidents_df[['road_type']].fillna('Unknown')
-
-
-## Assign Missing Time Values
-
-
-
-## Assign Missing Weather Values To Unknown
-accidents_df[['weather']] = accidents_df[['weather']].fillna('Unknown')
-
-
-## Assign Missing Light Condition Values
-
-# Assign 'Darkness - lighting unknown' to winter months between 6pm and 9am
-accidents_df[['light_conditions']] = accidents_df.loc[((accidents_df['time'].dt.hour < 9) | (accidents_df['time'].dt.hour > 17)) &
-                                                    ((accidents_df['date'].dt.month > 9) & (accidents_df['date'].dt.month < 4))][['light_conditions']].fillna('Darkness - lighting unknown')
-
-# Assign 'Daylight' to winter months between 9am and 6pm
-accidents_df[['light_conditions']] = accidents_df.loc[((accidents_df['time'].dt.hour >= 9) & (accidents_df['time'].dt.hour <= 17)) &
-                                                    ((accidents_df['date'].dt.month > 9) & (accidents_df['date'].dt.month < 4))][['light_conditions']].fillna('Daylight')
-
-
-# Assign 'Darkness - lighting unknown' to summer months between 9pm and 7am
-accidents_df[['light_conditions']] = accidents_df.loc[((accidents_df['time'].dt.hour < 7) | (accidents_df['time'].dt.hour > 21)) &
-                                                    ((accidents_df['date'].dt.month <= 9) | (accidents_df['date'].dt.month >= 4))][['light_conditions']].fillna('Darkness - lighting unknown')
-
-# Assign 'Daylight' to summer months between 7am and 9pm
-accidents_df[['light_conditions']] = accidents_df.loc[((accidents_df['time'].dt.hour >= 7) & (accidents_df['time'].dt.hour <= 21)) &
-                                                    ((accidents_df['date'].dt.month <= 9) | (accidents_df['date'].dt.month >= 4))][['light_conditions']].fillna('Daylight')
-
-
-## Assign Missing Junction Detail Values
-
-print(accidents_df['junction_detail'].unique())
-
-
-## Assign Missing Pedestrian Crossing Detail Values
-
-print(accidents_df['pedestrian_crossing_human'].unique())
-
-
-## Assign Missing Site Condition Values
-
-print(accidents_df['site_conditions'].unique())
-
-
-## Assign Missing Carriageway Hazard Values
-
-print(accidents_df['carriageway_hazards'].unique())
-
-
-## Assign Missing Pedestrian Crossing Physical Values
-
-print(accidents_df['pedestrian_crossing_physical'].unique())
-
-
-## Assign Missing Road Condition Values
-
-print(accidents_df['road_conditions'].unique())
-
-
-## Assign Missing Junction Control Values
-
-print(accidents_df['junction_control'].unique())
-
-
-
-### Missing Values in Casualties
-
-
-## Assign Location Values
-print(casualties_df['location'].unique())
-
-
-## Assign Missing Pedestrian Movement Values
-print(casualties_df['pedestrian_movement'].unique())
-
-
-## Assign Missing bus or coach passenger Values
-print(casualties_df['bus_or_coach_passenger'].unique())
-
-
-## Assign Missing Casualty Sex Values
-print(casualties_df['casualty_sex'].unique())
-
-
-## Assign Missing Car Passenger Values
-print(casualties_df['car_passenger'].unique())
-
-
-## Assign Missing Car Passenger Values
-print(casualties_df['casualty_age'].unique())
-
-
-### Missing Values in Vehicles
-
-
-## Assign Missing Driver Sex Values
-print(vehicles_df['driver_sex'].unique())
-
-
-## Assign Missing Vehicle Type Values
-print(vehicles_df['vehicle_type'].unique())
-
-
-## Assign Missing Off Carriageway Values
-print(vehicles_df['hit_object_off_carriageway'].unique())
-
-
-## Assign Missing Junction Location Values
-print(vehicles_df['junction_location'].unique())
-
-
-## Assign Missing Skidding Values
-print(vehicles_df['skidding_and_overturning'].unique())
-
-
-## Assign Missing Towing Values
-print(vehicles_df['towing_and_articulation'].unique())
-
-
-## Assign Missing Manoeuvre Values
-print(vehicles_df['vehicle_manoeuvre'].unique())
-
-
-## Assign Missing Leaving Carriageway Values
-print(vehicles_df['vehicle_leaving_carriageway'].unique())
-
-
-## Assign Missing Left Hand Drive Values
-print(vehicles_df['left_hand_drive'].unique())
-
-
-## Assign Missing Hit Object Values
-print(vehicles_df['hit_object_in_carriageway'].unique())
-
-
-## Assign Missing Impact Values
-print(vehicles_df['impact'].unique())
-
-
-## Assign Missing Driver Age Values
-print(vehicles_df['driver_age'].unique())
-
-
-## Assign Missing Propulsion Code Values
-print(vehicles_df['propulsion_code'].unique())
-
-
-## Assign Missing Vehicle Age Values
-print(vehicles_df['vehicle_age'].unique())
-
-
-
-### Missing Values in Population
-
-
-
-
-
 #### Formatting Columns Entries For Each Table
 
 
@@ -290,11 +118,255 @@ casualties_df = casualties_df.applymap(lambda column: column.title() if type(col
 vehicles_df = vehicles_df.applymap(lambda column: column.title() if type(column) == str else column)
 
 
-## Update a dictionary with cleaned entry data frames
+## Remove leading/trailing dots and spaces from columns
+
+# Remove accidents leading/trailing dots and spaces from column strings
+accidents_df = accidents_df.applymap(lambda column: column.strip('.! ') if type(column) == str else column)
+
+# Remove casualties leading/trailing dots and spaces from column strings
+casualties_df = casualties_df.applymap(lambda column: column.strip('.! ') if type(column) == str else column)
+
+# Remove vehicle leading/trailing dots and spaces from column strings
+vehicles_df = vehicles_df.applymap(lambda column: column.strip('.! ') if type(column) == str else column)
+
+
+
+### Update a dictionary with cleaned entry data frames
 df_dict_cleaned.update({'Casualties' : casualties_df,
            'Vehicles' : vehicles_df,
            'Accidents' : accidents_df,
            'Population' : population_statistics_df})
+
+
+#### Handling Missing Values and Formats
+
+
+
+### Missing Values and Formats in Accidents
+
+
+## Drop columns with more than half of entires missing if not needed for later analysis
+
+# Drop speed limit, junction control
+accidents_df = accidents_df.drop(['speed_limit', 'junction_control'], axis='columns')
+
+
+## Assign Missing Road Type To Unknown Category
+
+# Replace NA's with 'Unknown'
+accidents_df['road_type'].fillna('Unknown', inplace=True)
+
+
+## Assign Missing Time Values
+print(accidents_df.columns)
+print(accidents_df[accidents_df['time'].isna()][['time', 'light_conditions', 'site_conditions']])
+
+
+## Assign Missing Weather Values To Unknown Category
+
+# Replace NA's with 'Unknown'
+accidents_df['weather'].fillna('Unknown', inplace=True)
+
+
+## Assign Missing Light Condition Values
+
+# Assign 'Darkness - lighting unknown' to winter months between 6pm and 9am
+winter_night = ((accidents_df['time'].dt.hour < 9) | (accidents_df['time'].dt.hour > 17)) & ((accidents_df['date'].dt.month > 9) | (accidents_df['date'].dt.month < 4))
+accidents_df.loc[winter_night, 'light_conditions'] = accidents_df.loc[winter_night, 'light_conditions'].fillna('Darkness - Lighting Unknown')
+
+# # Assign 'Daylight' to winter months between 9am and 6pm
+winter_day = ((accidents_df['time'].dt.hour >= 9) & (accidents_df['time'].dt.hour <= 17)) & ((accidents_df['date'].dt.month > 9) | (accidents_df['date'].dt.month < 4))
+accidents_df.loc[winter_day, 'light_conditions'] = accidents_df.loc[winter_day, 'light_conditions'].fillna('Daylight')
+
+# Assign 'Darkness - lighting unknown' to summer months between 9pm and 7am
+summer_night = ((accidents_df['time'].dt.hour < 7) | (accidents_df['time'].dt.hour >= 21)) & ((accidents_df['date'].dt.month <= 9) & (accidents_df['date'].dt.month >= 4))
+accidents_df.loc[summer_night, 'light_conditions'] = accidents_df.loc[summer_night, 'light_conditions'].fillna('Darkness - Lighting Unknown')
+
+# Assign 'Daylight' to summer months between 7am and 9pm
+summer_day = ((accidents_df['time'].dt.hour >= 7) & (accidents_df['time'].dt.hour < 21)) & ((accidents_df['date'].dt.month <= 9) & (accidents_df['date'].dt.month >= 4))
+accidents_df.loc[summer_day, 'light_conditions'] = accidents_df.loc[summer_day, 'light_conditions'].fillna('Daylight')
+
+
+## Assign Missing Junction Detail Values
+
+# Turn junction details to same format, assign NA's to 'Unknown'
+accidents_df['junction_detail'] = np.select(condlist=[accidents_df['junction_detail'] == 'Notatjunctionorwithin20metres',
+                                                      accidents_df['junction_detail'] == 'Otherjunction',
+                                                      accidents_df['junction_detail'] == 'Torstaggeredjunction',
+                                                      accidents_df['junction_detail'] == 'Morethan4arms(notroundabout)',
+                                                      accidents_df['junction_detail'] == 'Privatedriveorentrance',
+                                                      accidents_df['junction_detail'] == 'Sliproad',
+                                                      accidents_df['junction_detail'].isna()],
+                                            choicelist=['Not At junction or within 20 metres',
+                                                        'Other Junction',
+                                                        'T Or Staggered Junction',
+                                                        'More Than 4 Arms (Not Roundabout)',
+                                                        'Private Drive Or Entrance',
+                                                        'Slip Road',
+                                                        'Unknown'],
+                                            default=accidents_df['junction_detail'])
+
+
+## Assign Missing Pedestrian Crossing Detail Values
+
+# Replace NA's with 'Unknown'
+accidents_df['pedestrian_crossing_human'].fillna('Unknown', inplace=True)
+
+
+## Assign Missing Site Condition Values
+
+# Replace NA's with 'Unknown'
+accidents_df['site_conditions'].fillna('Unknown', inplace=True)
+
+
+## Assign Missing Carriageway Hazard Values
+
+# Replace NA's with 'Unknown'
+accidents_df['carriageway_hazards'].fillna('Unknown', inplace=True)
+
+
+## Assign Missing Pedestrian Crossing Physical Values
+
+# Replace NA's with 'Unknown'
+accidents_df['pedestrian_crossing_physical'].fillna('Unknown', inplace=True)
+
+
+## Assign Missing Road Condition Values
+
+# Imputing using typical road condition by weather type
+accidents_df['road_conditions'] = np.select(condlist=[accidents_df['weather'].str.contains('Fine') & accidents_df['road_conditions'].isna(), 
+                                                      accidents_df['weather'].str.contains('Raining') & accidents_df['road_conditions'].isna(), 
+                                                      accidents_df['weather'].str.contains('Snowing') & accidents_df['road_conditions'].isna(),
+                                                      accidents_df['road_conditions'].isna()],
+                                            choicelist=['Dry',
+                                                        'Wet Or Damp',
+                                                        'Snow',
+                                                        'Unknown'],
+                                            default=accidents_df['road_conditions'])
+
+
+
+### Missing Values And Formats in Casualties
+
+print(casualties_df.columns)
+
+## Assign Location Values
+
+# Replace NA's with 'Unknown or other'
+casualties_df['location'].fillna('Unknown Or Other', inplace=True)
+
+
+## Assign Missing Pedestrian Movement Values
+
+# Replace NA's with 'Unknown or other'
+casualties_df['pedestrian_movement'].fillna('Unknown Or Other', inplace=True)
+
+
+## Assign Missing bus or coach passenger Values
+
+# Replace NA's with 'Unknown or other'
+casualties_df['pedestrian_movement'].fillna('Unknown Or Other', inplace=True)
+
+
+## Assign Missing Casualty Sex Values
+
+# Replace NA's with 'Unknown or other'
+casualties_df['casualty_sex'].fillna('Unknown', inplace=True)
+
+# Use starting values to identify sex
+casualties_df['casualty_sex'] = np.select(condlist=[casualties_df['casualty_sex'].str.startswith('M', 'S'),
+                                                    casualties_df['casualty_sex'].str.startswith('F', 'W'),
+                                                    casualties_df['casualty_sex'].isna()],
+                                          choicelist=['Male',
+                                                    'Female',
+                                                    'Unknown'],
+                                          default = 'Unknown')
+
+## Assign Missing Car Passenger Values
+
+# Assign pedestrians NA's to not car passenger
+casualties_df['car_passenger'] = np.where(casualties_df['casualty_class'] == 'Pedestrian', 
+                                          'Not Car Passenger',
+                                          casualties_df['car_passenger'])
+
+# Replace NA's with 'Unknown or other'
+casualties_df['car_passenger'].fillna('Unknown', inplace=True)
+
+
+## Assign Missing Casualty Age  Values
+#print(casualties_df['casualty_age'].unique())
+
+
+
+### Missing Values in Vehicles
+
+## Drop columns with more than half of entires missing if not needed for later analysis
+
+# Drop vehicle age, propulsion control
+vehicles_df = vehicles_df.drop(['vehicle_age', 'propulsion_code'], axis='columns')
+
+
+## Assign Missing Driver Sex Values
+
+# Replace NA's with 'Unknown or other'
+vehicles_df['driver_sex'].fillna('Not Known', inplace=True)
+
+# Use starting values to identify sex
+vehicles_df['driver_sex'] = np.select([vehicles_df['driver_sex'].str.startswith('M','S'), 
+                                       vehicles_df['driver_sex'].str.startswith('F','W')],
+                                       ['Male', 'Female'], 
+                                       default='Not Known')
+
+
+## Assign Missing Vehicle Type Values
+#print(vehicles_df['vehicle_type'].unique())
+
+
+## Assign Missing Off Carriageway Values
+#print(vehicles_df['hit_object_off_carriageway'].unique())
+
+
+## Assign Missing Junction Location Values
+#print(vehicles_df['junction_location'].unique())
+
+
+## Assign Missing Skidding Values
+#print(vehicles_df['skidding_and_overturning'].unique())
+
+
+## Assign Missing Towing Values
+#print(vehicles_df['towing_and_articulation'].unique())
+
+
+## Assign Missing Manoeuvre Values
+#print(vehicles_df['vehicle_manoeuvre'].unique())
+
+
+## Assign Missing Leaving Carriageway Values
+#print(vehicles_df['vehicle_leaving_carriageway'].unique())
+
+
+## Assign Missing Left Hand Drive Values
+#print(vehicles_df['left_hand_drive'].unique())
+
+
+## Assign Missing Hit Object Values
+#print(vehicles_df['hit_object_in_carriageway'].unique())
+
+
+## Assign Missing Impact Values
+#print(vehicles_df['impact'].unique())
+
+
+## Assign Missing Driver Age Values
+#print(vehicles_df['driver_age'].unique())
+
+
+
+### Missing Values in Population
+
+
+
 
 
 
@@ -378,8 +450,8 @@ print('Note: Duplicate Data Reports Exported To CSV.')
 
 ### Country Column
 
-# Use starting value of highway code to identify country
-accidents_df['Country'] = np.select(condlist=[accidents_df['highway_authority'].str.startswith('E'), 
+# Use starting value of highway code to identify country, 'Unknown' as catch-all
+accidents_df['country'] = np.select(condlist=[accidents_df['highway_authority'].str.startswith('E'), 
                                               accidents_df['highway_authority'].str.startswith('S'), 
                                               accidents_df['highway_authority'].str.startswith('W'), 
                                               accidents_df['highway_authority'].str.startswith('N'), 
@@ -388,21 +460,22 @@ accidents_df['Country'] = np.select(condlist=[accidents_df['highway_authority'].
                                                 'Scotland', 
                                                 'Wales', 
                                                 'Northern Ireland', 
-                                                'Unknown'])
+                                                'Missing'],
+                                    default = 'Unknown')
 
 
 
 ### Weekday Column
 
 # Obtain weekday from date
-accidents_df['Weekday'] = accidents_df['date'].dt.day_name()
+accidents_df['weekday'] = accidents_df['date'].dt.day_name()
 
 
 
 ### Season Column
 
-# Use date months to identify season
-accidents_df['Season'] = np.select(condlist=[(accidents_df['date'].dt.month >= 12) | (accidents_df['date'].dt.month < 3), 
+# Use date months to identify season, unknown as catch-all
+accidents_df['season'] = np.select(condlist=[(accidents_df['date'].dt.month >= 12) | (accidents_df['date'].dt.month < 3), 
                                              (accidents_df['date'].dt.month >= 3) & (accidents_df['date'].dt.month < 6),
                                              (accidents_df['date'].dt.month >=6) & (accidents_df['date'].dt.month < 9), 
                                              (accidents_df['date'].dt.month >= 9) & (accidents_df['date'].dt.month < 12),
@@ -411,7 +484,8 @@ accidents_df['Season'] = np.select(condlist=[(accidents_df['date'].dt.month >= 1
                                                 'Spring', 
                                                 'Summer', 
                                                 'Autumn',
-                                                'Unknown'])
+                                                'Missing'],
+                                    default = 'Unknown')
 
 
 
@@ -442,12 +516,14 @@ vehicles_df['vehicles_per_accident'] = vehicles_df.reset_index().groupby(['index
 
 #### Create Road_Accidents
 
+
 ## Combining Accidents, Casualties, Vehicles
 
 # Merge accidents with casualties on common accidents index as key, then merge vehicles on common accidents index as key, using left joins as we want to retain all accidents as the dominant table of interest
 #- Resetting index in accidents table to retain it on merge
 #- Validating one-to-many in first accidents merge with casualties, as accidents should be unique
 road_accidents = accidents_df.reset_index().merge(casualties_df, how='left', left_on='index', right_on='index', validate='one_to_many').merge(vehicles_df, how='left', left_on='index', right_on='index')
+
 
 ## Merging Population Statistics
 
@@ -458,13 +534,6 @@ road_accidents = road_accidents.merge(population_statistics_df, how='left', left
 
 ## Create Animal Involved Column
 
-
-print(road_accidents.columns)
-print(road_accidents['carriageway_hazards'].unique())
-print(road_accidents['hit_object_in_carriageway'].unique())
-print(road_accidents['hit_object_off_carriageway'].unique())
-print(road_accidents['vehicle_type'].unique())
-
 # If any column columns listed contain an animal description assign 'Yes', else 'No'
 road_accidents['animal_involved'] = np.where((road_accidents['carriageway_hazards'] == 'Any Animal In Carriageway (Except Ridden Horse)') | 
                                              (road_accidents['hit_object_in_carriageway'] == 'Any Animal (Except Ridden Horse)') | 
@@ -472,9 +541,7 @@ road_accidents['animal_involved'] = np.where((road_accidents['carriageway_hazard
                                              'Yes', 
                                              'No')
 
-print(road_accidents[road_accidents['carriageway_hazards'] == 'Any Animal In Carriageway (Except Ridden Horse)'])
-
-road_accidents.to_csv(reports_path/'road_accidents.csv', 
-               index=True, 
-               header=road_accidents
-               .columns)
+# Send Road Accidents To Reports As CSV
+road_accidents.to_csv(cleaned_data_path/'road_accidents.csv', 
+               index=False, 
+               header=road_accidents.columns)
