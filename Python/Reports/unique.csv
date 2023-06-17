@@ -1,0 +1,442 @@
+Table,Column,Unique_Value,Number_Values
+Population,Area_Name,Aberdeen City,1
+Population,Area_Name,Redditch,1
+Population,Area_Name,Rotherham,1
+Population,Area_Name,Rother,1
+Population,Area_Name,Rossendale,1
+Population,Area_Name,Rochford,1
+Population,Area_Name,Rochdale,1
+Population,Area_Name,Richmondshire,1
+Population,Area_Name,Richmond upon Thames,1
+Population,Area_Name,Ribble Valley,1
+Population,Area_Name,Rhondda Cynon Taf,1
+Population,Area_Name,Renfrewshire,1
+Population,Area_Name,Reigate and Banstead,1
+Population,Area_Name,Redcar and Cleveland,1
+Population,Area_Name,Runnymede,1
+Population,Area_Name,Redbridge,1
+Population,Area_Name,Reading,1
+Population,Area_Name,Purbeck,1
+Population,Area_Name,Preston,1
+Population,Area_Name,Powys,1
+Population,Area_Name,Portsmouth,1
+Population,Area_Name,Poole,1
+Population,Area_Name,Plymouth,1
+Population,Area_Name,Peterborough,1
+Population,Area_Name,Perth and Kinross,1
+Population,Area_Name,Pendle,1
+Population,Area_Name,Rugby,1
+Population,Area_Name,Rushcliffe,1
+Population,Area_Name,Melton,1
+Population,Area_Name,Sevenoaks,1
+Population,Area_Name,South Derbyshire,1
+Population,Area_Name,South Cambridgeshire,1
+Population,Area_Name,South Bucks,1
+Population,Area_Name,South Ayrshire,1
+Population,Area_Name,Somerset,1
+Population,Area_Name,Solihull,1
+Population,Area_Name,Slough,1
+Population,Area_Name,Shropshire,1
+Population,Area_Name,Shetland Islands,1
+Population,Area_Name,Shepway,1
+Population,Area_Name,Sheffield,1
+Population,Area_Name,Selby,1
+Population,Area_Name,Rushmoor,1
+Population,Area_Name,Sefton,1
+Population,Area_Name,Sedgemoor,1
+Population,Area_Name,Scottish Borders,1
+Population,Area_Name,Scarborough,1
+Population,Area_Name,Sandwell,1
+Population,Area_Name,Salford,1
+Population,Area_Name,SOUTH WEST,1
+Population,Area_Name,SOUTH EAST,1
+Population,Area_Name,SCOTLAND,1
+Population,Area_Name,Ryedale,1
+Population,Area_Name,Rutland,1
+Population,Area_Name,Pembrokeshire,1
+Population,Area_Name,Oxfordshire,1
+Population,Area_Name,Oxford,1
+Population,Area_Name,Monmouthshire,1
+Population,Area_Name,Newham,1
+Population,Area_Name,Newcastle-under-Lyme,1
+Population,Area_Name,Newcastle upon Tyne,1
+Population,Area_Name,Newark and Sherwood,1
+Population,Area_Name,New Forest,1
+Population,Area_Name,Neath Port Talbot,1
+Population,Area_Name,Na h-Eileanan Siar,1
+Population,Area_Name,NORTHERN IRELAND,1
+Population,Area_Name,NORTH WEST,1
+Population,Area_Name,NORTH EAST,1
+Population,Area_Name,Moray,1
+Population,Area_Name,Mole Valley,1
+Population,Area_Name,Orkney Islands,1
+Population,Area_Name,Milton Keynes,1
+Population,Area_Name,Midlothian,1
+Population,Area_Name,Middlesbrough,1
+Population,Area_Name,Mid and East Antrim,1
+Population,Area_Name,Mid Ulster,1
+Population,Area_Name,Mid Sussex,1
+Population,Area_Name,Mid Suffolk,1
+Population,Area_Name,Mid Devon,1
+Population,Area_Name,Merton,1
+Population,Area_Name,Merthyr Tydfil,1
+Population,Area_Name,Merseyside (Met County),1
+Population,Area_Name,Newport,1
+Population,Area_Name,"Newry, Mourne and Down",1
+Population,Area_Name,Norfolk,1
+Population,Area_Name,North Ayrshire,1
+Population,Area_Name,Oldham,1
+Population,Area_Name,Oadby and Wigston,1
+Population,Area_Name,Nuneaton and Bedworth,1
+Population,Area_Name,Nottinghamshire,1
+Population,Area_Name,Nottingham,1
+Population,Area_Name,Norwich,1
+Population,Area_Name,Northumberland,1
+Population,Area_Name,Northamptonshire,1
+Population,Area_Name,Northampton,1
+Population,Area_Name,North Yorkshire,1
+Population,Area_Name,North West Leicestershire,1
+Population,Area_Name,North Warwickshire,1
+Population,Area_Name,North Tyneside,1
+Population,Area_Name,North Somerset,1
+Population,Area_Name,North Norfolk,1
+Population,Area_Name,North Lincolnshire,1
+Population,Area_Name,North Lanarkshire,1
+Population,Area_Name,North Kesteven,1
+Population,Area_Name,North Hertfordshire,1
+Population,Area_Name,North East Lincolnshire,1
+Population,Area_Name,North East Derbyshire,1
+Population,Area_Name,North Dorset,1
+Population,Area_Name,North Devon,1
+Population,Area_Name,South Gloucestershire,1
+Population,Area_Name,South Hams,1
+Population,Area_Name,South Holland,1
+Population,Area_Name,Warwick,1
+Population,Area_Name,West Dunbartonshire,1
+Population,Area_Name,West Dorset,1
+Population,Area_Name,West Devon,1
+Population,Area_Name,West Berkshire,1
+Population,Area_Name,Welwyn Hatfield,1
+Population,Area_Name,Wellingborough,1
+Population,Area_Name,Wealden,1
+Population,Area_Name,Waverley,1
+Population,Area_Name,Waveney,1
+Population,Area_Name,Watford,1
+Population,Area_Name,Warwickshire,1
+Population,Area_Name,Warrington,1
+Population,Area_Name,Trafford,1
+Population,Area_Name,Wandsworth,1
+Population,Area_Name,Waltham Forest,1
+Population,Area_Name,Walsall,1
+Population,Area_Name,Wakefield,1
+Population,Area_Name,WEST MIDLANDS,1
+Population,Area_Name,WALES,1
+Population,Area_Name,Vale of White Horse,1
+Population,Area_Name,Vale of Glamorgan,1
+Population,Area_Name,Uttlesford,1
+Population,Area_Name,UNITED KINGDOM,1
+Population,Area_Name,Tyne and Wear (Met County),1
+Population,Area_Name,West Lancashire,1
+Population,Area_Name,West Lindsey,1
+Population,Area_Name,West Lothian,1
+Population,Area_Name,West Midlands (Met County),1
+Population,Area_Name,YORKSHIRE AND THE HUMBER,1
+Population,Area_Name,Wyre Forest,1
+Population,Area_Name,Wyre,1
+Population,Area_Name,Wycombe,1
+Population,Area_Name,Wychavon,1
+Population,Area_Name,Wrexham,1
+Population,Area_Name,Worthing,1
+Population,Area_Name,Worcestershire,1
+Population,Area_Name,Worcester,1
+Population,Area_Name,Wolverhampton,1
+Population,Area_Name,Wokingham,1
+Population,Area_Name,Woking,1
+Population,Area_Name,Wirral,1
+Population,Area_Name,Windsor and Maidenhead,1
+Population,Area_Name,Winchester,1
+Population,Area_Name,Wiltshire,1
+Population,Area_Name,Wigan,1
+Population,Area_Name,Weymouth and Portland,1
+Population,Area_Name,Westminster,1
+Population,Area_Name,West Yorkshire (Met County),1
+Population,Area_Name,West Sussex,1
+Population,Area_Name,West Somerset,1
+Population,Area_Name,West Oxfordshire,1
+Population,Area_Name,Tunbridge Wells,1
+Population,Area_Name,Tower Hamlets,1
+Population,Area_Name,South Kesteven,1
+Population,Area_Name,Southwark,1
+Population,Area_Name,Stockton-on-Tees,1
+Population,Area_Name,Stockport,1
+Population,Area_Name,Stirling,1
+Population,Area_Name,Stevenage,1
+Population,Area_Name,Staffordshire Moorlands,1
+Population,Area_Name,Staffordshire,1
+Population,Area_Name,Stafford,1
+Population,Area_Name,St. Helens,1
+Population,Area_Name,St Edmundsbury,1
+Population,Area_Name,St Albans,1
+Population,Area_Name,Spelthorne,1
+Population,Area_Name,Southend-on-Sea,1
+Population,Area_Name,Torridge,1
+Population,Area_Name,Southampton,1
+Population,Area_Name,South Yorkshire (Met County),1
+Population,Area_Name,South Tyneside,1
+Population,Area_Name,South Staffordshire,1
+Population,Area_Name,South Somerset,1
+Population,Area_Name,South Ribble,1
+Population,Area_Name,South Oxfordshire,1
+Population,Area_Name,South Northamptonshire,1
+Population,Area_Name,South Norfolk,1
+Population,Area_Name,South Lanarkshire,1
+Population,Area_Name,South Lakeland,1
+Population,Area_Name,Stoke-on-Trent,1
+Population,Area_Name,Stratford-on-Avon,1
+Population,Area_Name,Stroud,1
+Population,Area_Name,Suffolk,1
+Population,Area_Name,Torfaen,1
+Population,Area_Name,Torbay,1
+Population,Area_Name,Tonbridge and Malling,1
+Population,Area_Name,Thurrock,1
+Population,Area_Name,Three Rivers,1
+Population,Area_Name,Thanet,1
+Population,Area_Name,Tewkesbury,1
+Population,Area_Name,Test Valley,1
+Population,Area_Name,Tendring,1
+Population,Area_Name,Telford and Wrekin,1
+Population,Area_Name,Teignbridge,1
+Population,Area_Name,Taunton Deane,1
+Population,Area_Name,Tandridge,1
+Population,Area_Name,Tamworth,1
+Population,Area_Name,Tameside,1
+Population,Area_Name,Swindon,1
+Population,Area_Name,Swansea,1
+Population,Area_Name,Swale,1
+Population,Area_Name,Sutton,1
+Population,Area_Name,Surrey Heath,1
+Population,Area_Name,Surrey,1
+Population,Area_Name,Sunderland,1
+Population,Area_Name,Suffolk Coastal,1
+Population,Area_Name,Mendip,1
+Population,Area_Name,Medway,1
+Population,Area_Name,Aberdeenshire,1
+Population,Area_Name,Cherwell,1
+Population,Area_Name,Colchester,1
+Population,Area_Name,Clackmannanshire,1
+Population,Area_Name,City of London,1
+Population,Area_Name,City of Edinburgh,1
+Population,Area_Name,Christchurch,1
+Population,Area_Name,Chorley,1
+Population,Area_Name,Chiltern,1
+Population,Area_Name,Chichester,1
+Population,Area_Name,Chesterfield,1
+Population,Area_Name,Cheshire West and Chester,1
+Population,Area_Name,Cheshire East,1
+Population,Area_Name,Cheltenham,1
+Population,Area_Name,Copeland,1
+Population,Area_Name,Chelmsford,1
+Population,Area_Name,Charnwood,1
+Population,Area_Name,Ceredigion,1
+Population,Area_Name,Central Bedfordshire,1
+Population,Area_Name,Causeway Coast and Glens,1
+Population,Area_Name,Castle Point,1
+Population,Area_Name,Carmarthenshire,1
+Population,Area_Name,Carlisle,1
+Population,Area_Name,Cardiff,1
+Population,Area_Name,Canterbury,1
+Population,Area_Name,Cannock Chase,1
+Population,Area_Name,Conwy,1
+Population,Area_Name,Corby,1
+Population,Area_Name,Mansfield,1
+Population,Area_Name,Derby,1
+Population,Area_Name,EAST,1
+Population,Area_Name,Dundee City,1
+Population,Area_Name,Dumfries and Galloway,1
+Population,Area_Name,Dudley,1
+Population,Area_Name,Dover,1
+Population,Area_Name,Dorset,1
+Population,Area_Name,Doncaster,1
+Population,Area_Name,Devon,1
+Population,Area_Name,Derry City and Strabane,1
+Population,Area_Name,Derbyshire Dales,1
+Population,Area_Name,Derbyshire,1
+Population,Area_Name,Denbighshire,1
+Population,Area_Name,Cornwall,1
+Population,Area_Name,Daventry,1
+Population,Area_Name,Dartford,1
+Population,Area_Name,Darlington,1
+Population,Area_Name,Dacorum,1
+Population,Area_Name,Cumbria,1
+Population,Area_Name,Croydon,1
+Population,Area_Name,Crawley,1
+Population,Area_Name,Craven,1
+Population,Area_Name,Coventry,1
+Population,Area_Name,County Durham,1
+Population,Area_Name,Cotswold,1
+Population,Area_Name,Camden,1
+Population,Area_Name,Cambridgeshire,1
+Population,Area_Name,Cambridge,1
+Population,Area_Name,Babergh,1
+Population,Area_Name,Bexley,1
+Population,Area_Name,Belfast,1
+Population,Area_Name,Bedford,1
+Population,Area_Name,Bath and North East Somerset,1
+Population,Area_Name,Bassetlaw,1
+Population,Area_Name,Basingstoke and Deane,1
+Population,Area_Name,Basildon,1
+Population,Area_Name,Barrow-in-Furness,1
+Population,Area_Name,Barnsley,1
+Population,Area_Name,Barnet,1
+Population,Area_Name,Barking and Dagenham,1
+Population,Area_Name,Aylesbury Vale,1
+Population,Area_Name,Calderdale,1
+Population,Area_Name,Ashford,1
+Population,Area_Name,Ashfield,1
+Population,Area_Name,Arun,1
+Population,Area_Name,"Armagh City, Banbridge and Craigavon",1
+Population,Area_Name,Argyll and Bute,1
+Population,Area_Name,Ards and North Down,1
+Population,Area_Name,Antrim and Newtownabbey,1
+Population,Area_Name,Angus,1
+Population,Area_Name,Amber Valley,1
+Population,Area_Name,Allerdale,1
+Population,Area_Name,Adur,1
+Population,Area_Name,Birmingham,1
+Population,Area_Name,Blaby,1
+Population,Area_Name,Blackburn with Darwen,1
+Population,Area_Name,Blackpool,1
+Population,Area_Name,Caerphilly,1
+Population,Area_Name,Bury,1
+Population,Area_Name,Burnley,1
+Population,Area_Name,Buckinghamshire,1
+Population,Area_Name,Broxtowe,1
+Population,Area_Name,Broxbourne,1
+Population,Area_Name,Bromsgrove,1
+Population,Area_Name,Bromley,1
+Population,Area_Name,Broadland,1
+Population,Area_Name,"Bristol, City of",1
+Population,Area_Name,Brighton and Hove,1
+Population,Area_Name,Bridgend,1
+Population,Area_Name,Brentwood,1
+Population,Area_Name,Brent,1
+Population,Area_Name,Breckland,1
+Population,Area_Name,Braintree,1
+Population,Area_Name,Bradford,1
+Population,Area_Name,Bracknell Forest,1
+Population,Area_Name,Bournemouth,1
+Population,Area_Name,Boston,1
+Population,Area_Name,Bolton,1
+Population,Area_Name,Bolsover,1
+Population,Area_Name,Blaenau Gwent,1
+Population,Area_Name,EAST MIDLANDS,1
+Population,Area_Name,ENGLAND,1
+Population,Area_Name,ENGLAND AND WALES,1
+Population,Area_Name,Hinckley and Bosworth,1
+Population,Area_Name,Kensington and Chelsea,1
+Population,Area_Name,Islington,1
+Population,Area_Name,Isles of Scilly,1
+Population,Area_Name,Isle of Wight,1
+Population,Area_Name,Isle of Anglesey,1
+Population,Area_Name,Ipswich,1
+Population,Area_Name,Inverclyde,1
+Population,Area_Name,Hyndburn,1
+Population,Area_Name,Huntingdonshire,1
+Population,Area_Name,Hounslow,1
+Population,Area_Name,Horsham,1
+Population,Area_Name,Hillingdon,1
+Population,Area_Name,Harlow,1
+Population,Area_Name,Highland,1
+Population,Area_Name,High Peak,1
+Population,Area_Name,Hertsmere,1
+Population,Area_Name,Hertfordshire,1
+Population,Area_Name,"Herefordshire, County of",1
+Population,Area_Name,Havering,1
+Population,Area_Name,Havant,1
+Population,Area_Name,Hastings,1
+Population,Area_Name,Hartlepool,1
+Population,Area_Name,Hart,1
+Population,Area_Name,Harrow,1
+Population,Area_Name,Kent,1
+Population,Area_Name,Kettering,1
+Population,Area_Name,King's Lynn and West Norfolk,1
+Population,Area_Name,"Kingston upon Hull, City of",1
+Population,Area_Name,Manchester,1
+Population,Area_Name,Malvern Hills,1
+Population,Area_Name,Maldon,1
+Population,Area_Name,Maidstone,1
+Population,Area_Name,Luton,1
+Population,Area_Name,London Airport (Heathrow),1
+Population,Area_Name,Liverpool,1
+Population,Area_Name,Lisburn and Castlereagh,1
+Population,Area_Name,Lincolnshire,1
+Population,Area_Name,Lincoln,1
+Population,Area_Name,Lichfield,1
+Population,Area_Name,Lewisham,1
+Population,Area_Name,Lewes,1
+Population,Area_Name,Leicestershire,1
+Population,Area_Name,Leicester,1
+Population,Area_Name,Leeds,1
+Population,Area_Name,Lancaster,1
+Population,Area_Name,Lancashire,1
+Population,Area_Name,Lambeth,1
+Population,Area_Name,LONDON,1
+Population,Area_Name,Knowsley,1
+Population,Area_Name,Kirklees,1
+Population,Area_Name,Kingston upon Thames,1
+Population,Area_Name,Harrogate,1
+Population,Area_Name,Haringey,1
+Population,Area_Name,Ealing,1
+Population,Area_Name,East Staffordshire,1
+Population,Area_Name,Exeter,1
+Population,Area_Name,Essex,1
+Population,Area_Name,Erewash,1
+Population,Area_Name,Epsom and Ewell,1
+Population,Area_Name,Epping Forest,1
+Population,Area_Name,Enfield,1
+Population,Area_Name,Elmbridge,1
+Population,Area_Name,Eden,1
+Population,Area_Name,Eastleigh,1
+Population,Area_Name,Eastbourne,1
+Population,Area_Name,East Sussex,1
+Population,Area_Name,East Riding of Yorkshire,1
+Population,Area_Name,Harborough,1
+Population,Area_Name,East Renfrewshire,1
+Population,Area_Name,East Northamptonshire,1
+Population,Area_Name,East Lothian,1
+Population,Area_Name,East Lindsey,1
+Population,Area_Name,East Hertfordshire,1
+Population,Area_Name,East Hampshire,1
+Population,Area_Name,East Dunbartonshire,1
+Population,Area_Name,East Dorset,1
+Population,Area_Name,East Devon,1
+Population,Area_Name,East Cambridgeshire,1
+Population,Area_Name,East Ayrshire,1
+Population,Area_Name,Falkirk,1
+Population,Area_Name,Fareham,1
+Population,Area_Name,Fenland,1
+Population,Area_Name,Fermanagh and Omagh,1
+Population,Area_Name,Hampshire,1
+Population,Area_Name,Hammersmith and Fulham,1
+Population,Area_Name,Hambleton,1
+Population,Area_Name,Halton,1
+Population,Area_Name,Hackney,1
+Population,Area_Name,Gwynedd,1
+Population,Area_Name,Guildford,1
+Population,Area_Name,Greenwich,1
+Population,Area_Name,Greater Manchester (Met County),1
+Population,Area_Name,Great Yarmouth,1
+Population,Area_Name,Gravesham,1
+Population,Area_Name,Gosport,1
+Population,Area_Name,Gloucestershire,1
+Population,Area_Name,Gloucester,1
+Population,Area_Name,Glasgow City,1
+Population,Area_Name,Gedling,1
+Population,Area_Name,Gateshead,1
+Population,Area_Name,GREAT BRITAIN,1
+Population,Area_Name,Fylde,1
+Population,Area_Name,Forest of Dean,1
+Population,Area_Name,Forest Heath,1
+Population,Area_Name,Flintshire,1
+Population,Area_Name,Fife,1
+Population,Area_Name,York,1

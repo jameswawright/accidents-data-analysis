@@ -151,6 +151,51 @@ plt.show()
 
 ## Report On Accidents Per Day
 
+# Compute Number of Accidents Per Day
+
+# Compute road accidents per weekday and order by above weekdays for report
+road_accidents_per_day = road_accidents.groupby(['date']).agg(total=('index','nunique')).reset_index()
+
+# Graphing and exporting to reports
+plt.figure()
+ax = plt.gca()
+road_accidents_per_day_plot = sns.lineplot(data=road_accidents_per_day,
+                                              x='date',
+                                              y='total',
+                                              color='darkmagenta')
+plt.xlabel("Date")
+plt.xticks(rotation=45)
+plt.ylabel("Number of Accidents")
+plt.title("Road Accidents Per Day")
+ax.xaxis.set_major_locator(mdates.MonthLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+fig = road_accidents_per_day_plot.get_figure()
+fig.set_size_inches(16, 8)
+fig.savefig(reports_path/'road_accidents_per_day_plot.png')
+plt.show()
+
+# Extract top 5 and bottom 5 days, then combine and sort
+days_largest = road_accidents_per_day.nlargest(5, 'total')
+days_smallest = road_accidents_per_day.nsmallest(5, 'total')
+road_accidents_top5_low5_per_day = pd.concat([days_largest, days_smallest], ignore_index=True).sort_values(by='total')
+road_accidents_top5_low5_per_day['date'] = road_accidents_top5_low5_per_day['date'].dt.date
+
+# Graphing and exporting to reports
+cols = ['darkmagenta', 'darkmagenta', 'darkmagenta', 'darkmagenta', 'darkmagenta', 'plum', 'plum', 'plum', 'plum', 'plum'] # Choose colors for top and bottom 5
+plt.figure()
+road_accidents_top5_low5_per_day_plot = sns.barplot(data=road_accidents_top5_low5_per_day,
+                                              x='date',
+                                              y='total',
+                                              palette = cols)
+plt.xlabel("Date")
+plt.ylabel("Number of Accidents")
+plt.title("Top and Bottom 5 Road Accidents Per Day")
+plt.bar_label(road_accidents_top5_low5_per_day_plot.containers[0], label_type='edge') #- Label bars 
+fig = road_accidents_top5_low5_per_day_plot.get_figure()
+fig.set_size_inches(16, 8)
+fig.savefig(reports_path/'road_accidents_top5_low5_per_day_plot.png')
+plt.show()
+
 # Reusing road_accidents_per_weekday
 # Graphing and exporting to reports
 plt.figure()
@@ -214,7 +259,7 @@ plt.figure()
 pop_vs_accidents_plot = sns.scatterplot(data=pop_vs_accidents,
                                         x='population',
                                         y='frequency',
-                                        color='purple')
+                                        color='darkmagenta')
 plt.xlabel("Population")
 plt.ticklabel_format(style='plain')
 plt.xticks(rotation=25)
